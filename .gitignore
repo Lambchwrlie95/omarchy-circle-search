@@ -1,0 +1,6 @@
+/target
+*.pkg.tar.zst
+/pkg/
+/omarchy-circle-search-git/
+/src/omarchy-circle-search-git/
+/src/cargo-home/

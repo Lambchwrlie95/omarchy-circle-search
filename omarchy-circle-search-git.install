@@ -1,0 +1,34 @@
+_setup() {
+    local bind="bindd = SUPER SHIFT, PRINT, Circle to Search, exec, omarchy-circle-search"
+
+    echo "  ┌─────────────────────────────────────────────┐"
+    echo "  │  omarchy-circle-search installed!           │"
+    echo "  └─────────────────────────────────────────────┘"
+    echo
+
+    for home in /root /home/*; do
+        local config="$home/.config/hypr/hyprland.conf"
+        [ -f "$config" ] || continue
+        if grep -Fqs "$bind" "$config"; then
+            echo "  ✓ Keybind already set — skipped"
+        else
+            echo "$bind" >> "$config"
+            echo "  ✓ Keybind added to $config"
+        fi
+    done
+
+    echo
+    echo "  Engines:  l (Lens)   y (Yandex)   b (Bing)"
+    echo "           t (TinEye) s (SauceNao) c (AI chat)"
+    echo
+    echo "  Run:  hyprctl reload"
+    echo "  Then: Super+Shift+Print to search"
+}
+
+post_install() {
+    _setup
+}
+
+post_upgrade() {
+    _setup
+}
